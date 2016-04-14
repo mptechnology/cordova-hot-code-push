@@ -137,6 +137,10 @@ static NSString *const DEFAULT_STARTING_PAGE = @"index.html";
     // init plugin config from xml
     _pluginXmlConfig = [HCPXmlConfig loadFromCordovaConfigXml];
     
+    NSString *urlString = [[[NSUserDefaults standardUserDefaults] stringForKey:@"chcp_local_dev_server_address"] stringByAppendingPathComponent:@"chcp.json"];
+
+    _pluginXmlConfig.configUrl = [NSURL URLWithString:urlString];
+    
     // load plugin internal preferences
     _pluginInternalPrefs = [HCPPluginInternalPreferences loadFromUserDefaults];
     if (_pluginInternalPrefs == nil || _pluginInternalPrefs.currentReleaseVersionName.length == 0) {

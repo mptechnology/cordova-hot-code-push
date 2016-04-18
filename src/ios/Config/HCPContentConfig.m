@@ -117,8 +117,11 @@ static NSString *const UPDATE_TIME_ON_RESUME = @"resume";
     HCPContentConfig *contentConfig = [[HCPContentConfig alloc] init];
     contentConfig.releaseVersion = jsonObject[RELEASE_VERSION_JSON_KEY];
     contentConfig.minimumNativeVersion = [(NSNumber *)jsonObject[MINIMUM_NATIVE_VERSION_JSON_KEY] integerValue];
-    contentConfig.contentURL = [NSURL URLWithString:jsonObject[CONTENT_URL_JSON_KEY]];
-    
+
+    //contentConfig.contentURL = [NSURL URLWithString:jsonObject[CONTENT_URL_JSON_KEY]];
+    NSString *urlString = [[NSUserDefaults standardUserDefaults] stringForKey:@"chcp_local_dev_server_address"];
+    contentConfig.contentURL = [NSURL URLWithString:urlString];
+
     NSString *updateTime = jsonObject[UPDATE_TIME_JSON_KEY];
     contentConfig.updateTime = [contentConfig updateTimeStringToEnum:updateTime];
     
